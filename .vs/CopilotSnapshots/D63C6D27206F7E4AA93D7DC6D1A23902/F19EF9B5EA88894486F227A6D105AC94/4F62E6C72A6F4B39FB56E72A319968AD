@@ -1,0 +1,42 @@
+﻿using System;
+
+namespace MIPVizsga
+{
+    /// <summary>
+    /// Abstract base class for delivery items.
+    /// </summary>
+    public abstract class Delivery
+    {
+        public int Id { get; set; }
+        public string Recipient { get; set; }
+        public int Priority { get; set; }
+        public string Status { get; set; }
+
+        /// <summary>
+        /// Gets the processing delay in milliseconds for this delivery.
+        /// </summary>
+        public abstract int GetProcessingDelayMs();
+    }
+
+    /// <summary>
+    /// Regular delivery for priorities 1 and 2 (600ms processing delay).
+    /// </summary>
+    public class RegularDelivery : Delivery
+    {
+        public override int GetProcessingDelayMs()
+        {
+            return 600;
+        }
+    }
+
+    /// <summary>
+    /// Express delivery for priority 3 (300ms processing delay).
+    /// </summary>
+    public class ExpressDelivery : Delivery
+    {
+        public override int GetProcessingDelayMs()
+        {
+            return 300;
+        }
+    }
+}

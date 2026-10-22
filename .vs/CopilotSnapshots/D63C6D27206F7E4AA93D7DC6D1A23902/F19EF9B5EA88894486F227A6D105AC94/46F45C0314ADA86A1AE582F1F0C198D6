@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace MIPVizsga
+{
+    /// <summary>
+    /// Repository interface for delivery persistence operations.
+    /// </summary>
+    public interface IDeliveryRepository
+    {
+        /// <summary>
+        /// Inserts a new delivery record into the database.
+        /// </summary>
+        void Insert(Delivery delivery);
+
+        /// <summary>
+        /// Loads all delivery records from the database.
+        /// </summary>
+        List<Delivery> LoadAll();
+
+        /// <summary>
+        /// Updates the status of a delivery record.
+        /// </summary>
+        void UpdateStatus(int deliveryId, string newStatus);
+
+        /// <summary>
+        /// Ensures the database and tables are initialized.
+        /// </summary>
+        void Initialize();
+    }
+}
