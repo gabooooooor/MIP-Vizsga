@@ -1,0 +1,19 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.pdb
+
+# SQLite
+*.db
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+*.sln.docstates
+
+# User-specific files
+*.userprefs
