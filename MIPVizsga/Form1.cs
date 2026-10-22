@@ -70,10 +70,22 @@ namespace MIPVizsga
             // Get all deliveries
             List<Delivery> deliveries = repository.LoadAll();
 
-            // Count each status using LINQ
-            int pending = deliveries.Where(d => d.Status == "Pending").Count();
-            int processing = deliveries.Where(d => d.Status == "Processing").Count();
-            int completed = deliveries.Where(d => d.Status == "Completed").Count();
+            // Count each status using LINQ GroupBy (required LINQ operation #2)
+            var statusGroups = deliveries.GroupBy(d => d.Status);
+
+            int pending = 0;
+            int processing = 0;
+            int completed = 0;
+
+            foreach (var group in statusGroups)
+            {
+                if (group.Key == "Pending")
+                    pending = group.Count();
+                else if (group.Key == "Processing")
+                    processing = group.Count();
+                else if (group.Key == "Completed")
+                    completed = group.Count();
+            }
 
             // Update label
             labelCounts.Text = $"Status: Pending={pending}, Processing={processing}, Completed={completed}";

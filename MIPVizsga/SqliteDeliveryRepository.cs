@@ -68,9 +68,9 @@ namespace MIPVizsga
 
             while (reader.Read())
             {
-                int id = (int)reader["Id"];
+                int id = (int)(long)reader["Id"];
                 string recipient = (string)reader["Recipient"];
-                int priority = (int)reader["Priority"];
+                int priority = (int)(long)reader["Priority"];
                 string status = (string)reader["Status"];
 
                 // Create the right type based on priority
