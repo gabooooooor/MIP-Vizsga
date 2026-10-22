@@ -113,6 +113,8 @@ namespace MIPVizsga
             // Insert into database
             repository.Insert(delivery);
 
+            TraceLogger.LogDeliveryAdded(delivery.Id);
+
             // Refresh UI
             textBoxRecipient.Text = "";
             RefreshDataGrid();
@@ -198,6 +200,8 @@ namespace MIPVizsga
 
                     // Update status to Completed
                     repository.UpdateStatus(nextDelivery.Id, "Completed");
+
+                    TraceLogger.LogDeliveryCompleted(nextDelivery.Id);
                 }
 
                 // Refresh UI on main thread
