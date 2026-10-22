@@ -172,15 +172,17 @@ namespace MIPVizsga
 
         private void ProcessDeliveries()
         {
+            DeliveryScheduler scheduler = new DeliveryScheduler();
+
             while (!stopRequested)
             {
-                // Get next pending delivery
+                // Get next pending delivery using scheduler
                 lock (lockObject)
                 {
                     List<Delivery> allDeliveries = repository.LoadAll();
 
-                    // Find next delivery to process
-                    Delivery nextDelivery = allDeliveries.FirstOrDefault(d => d.Status == "Pending");
+                    // Use scheduler to get next delivery based on priority rules
+                    Delivery nextDelivery = scheduler.GetNextDelivery(allDeliveries);
 
                     if (nextDelivery == null)
                     {
@@ -191,7 +193,7 @@ namespace MIPVizsga
                     // Update status to Processing
                     repository.UpdateStatus(nextDelivery.Id, "Processing");
 
-                    // Sleep for the processing time
+                    // Sleep for the processing time (polymorphic call)
                     System.Threading.Thread.Sleep(nextDelivery.GetProcessingDelayMs());
 
                     // Update status to Completed
